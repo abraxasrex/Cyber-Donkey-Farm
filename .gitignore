@@ -1,0 +1,12 @@
+# User Specific Targets
+.vs
+*.user
+*.lock*
+
+# Compile Targets/Artifacts
+bin
+obj
+
+# js
+node_modules
+*js
