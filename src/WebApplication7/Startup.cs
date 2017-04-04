@@ -53,7 +53,7 @@ namespace WebApplication7
             app.UseIdentity();
             app.UseStaticFiles();
             app.UseMvc();
-            SampleData.InitializeAsync(app.ApplicationServices).Wait();
+            //SampleData.InitializeAsync(app.ApplicationServices).Wait();
            
         }
     }

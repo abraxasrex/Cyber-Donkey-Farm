@@ -1,0 +1,15 @@
+﻿
+
+<div class="container col-md-12 col-xs-12">
+    <ul>
+        <li ng-repeat="donkey in vm.donkeys">
+            <hr />
+            <p>name: {{donkey.name}}</p>
+            <p> color: {{donkey.color}} </p>
+            <hr />
+                <button class="btn btn-warning" ng-click="vm.showModal(donkey)">edit</button>
+                <button class="btn btn-danger" ng-click="vm.remove(donkey.id)">delete</button>
+            <!--<hr />-->
+        </li>
+    </ul>
+</div>

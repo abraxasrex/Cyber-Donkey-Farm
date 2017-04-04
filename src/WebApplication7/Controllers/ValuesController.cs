@@ -33,7 +33,6 @@ namespace WebApplication7.Controllers
                         color = "blue"
                     }
              };
-
             //return seed;
             return _db.Donkeys.ToList();
         }
@@ -99,8 +98,19 @@ namespace WebApplication7.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Donkey donkey)
+        public IActionResult Put(int id, [FromBody]Donkey donkey)
         {
+            var _donkey = _db.Donkeys.FirstOrDefault(d => d.Id == id);
+            if(_donkey == null)
+            {
+                return NotFound();
+            }
+            _donkey.color = donkey.color;
+            _donkey.name = donkey.name;
+            _db.Donkeys.Update(_donkey);
+            _db.SaveChanges();
+            return Ok();
+
         }
 
         // DELETE api/values/5

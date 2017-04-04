@@ -1,33 +1,27 @@
 ﻿
 
 namespace mainApp {
-let module: ng.IModule = angular.module('mainApp', []);
-    export class mainController {
-        public world: string;
-        public donkeys;
-        public donkey;
-        public _save() {
-            this.$http.post('/api/values', this.donkey).then((donkey) => {
-                console.log("cool.");
-                this.list();
-            }).catch((e) => { console.log(e); })
-        }
-        public list() {
-            this.$http.get('/api/values').then((result) => {
-                this.donkeys = result.data;
-            }).catch((e) => console.log(e));;
-        }
-        constructor(private $http: ng.IHttpService) {
-            this.world = 'world';
-            this.donkey = {
-                color: '',
-                name: ''
-            };;
-            this.list();
-        }
-    }
-
-    module.controller('mainController', mainController);
+let module: ng.IModule = angular.module('mainApp', ['ui.router', 'ui.bootstrap']);
+    module.config((
+        $stateProvider: ng.ui.IStateProvider,
+        $locationProvider: ng.ILocationProvider,
+        $urlRouterProvider: ng.ui.IUrlRouterProvider
+    ) => {
+        $stateProvider.state('Home', {
+            url: '/',
+            templateUrl: 'home/home.view.html',
+            controller: mainApp.Controllers.mainController,
+            controllerAs: 'vm'
+        })
+            .state('Add', {
+                url: '/add',
+                templateUrl: 'add/add.view.html',
+                controller: mainApp.Controllers.addController,
+                controllerAs: 'vm'
+            });
+        $urlRouterProvider.otherwise('/');
+        $locationProvider.html5Mode(true);
+    });
 
 }
 
